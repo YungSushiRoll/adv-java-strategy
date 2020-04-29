@@ -5,6 +5,7 @@ public class CustomerOrder {
     private String customerName;
     private double billAmount;
     private char discountType;
+    private Deduction deduction;
 
     public CustomerOrder(String customerName, double billAmount, char discountType) {
         this.customerName = customerName;
@@ -12,25 +13,31 @@ public class CustomerOrder {
         this.discountType = discountType;
     }
 
+    public void setDeduction(Deduction newDeduction) {
+        deduction = newDeduction;
+    }
+
     public double getBillAmount() {
-        double tempBill;
         switch (discountType) {
             case 'S':
             case 's':
-                tempBill = billAmount - (billAmount * 0.1);
+                deduction = new Sales();
+                deduction.getBillAmount(billAmount);
                 break;
             case 'D':
             case 'd':
-                tempBill = billAmount - (billAmount * 0.5);
+                deduction = new Discount();
+                deduction.getBillAmount(billAmount);
                 break;
             case 'L':
             case 'l':
-                tempBill = billAmount - (billAmount * 0.75);
+                deduction = new Liquidation();
+                deduction.getBillAmount(billAmount);
                 break;
             default:
-                tempBill = billAmount;
+                deduction.getBillAmount(billAmount);
         }
-        return tempBill;
+        return deduction.getBillAmount(billAmount);
     }
 
     public void setBillAmount(double billAmount) {

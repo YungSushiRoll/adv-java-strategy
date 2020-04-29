@@ -7,6 +7,7 @@ public class Main {
         Student student2 = new Student("555 1st North St.", 51515, "Illinois", "262-414-5555", "Bob Fredrickson", 32);
 
         System.out.println(student1.getName() + " is from " + student1.getState());
-        System.out.println(student2.getName() + " is from " + student2.getState());
+        System.out.println(student2.getName() + " is from " + student2.getState() + "\nBob's Address:" + student2.getAddress());
+        // just wanted to play around, added a getAddress()
     }
 }
